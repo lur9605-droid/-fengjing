@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { storage } from '@/lib/storage';
+import LazyImage from './LazyImage';
 
 export default function Navigation() {
   const [currentUser, setCurrentUser] = useState<any>(null);
@@ -50,7 +51,13 @@ export default function Navigation() {
               <div className="flex items-center space-x-4">
                 <Link href={`/user/${currentUser.id}`} className="flex items-center space-x-2 text-healing-secondary hover:text-healing-accent transition-colors">
                   {currentUser.avatar ? (
-                    <img src={currentUser.avatar} alt={currentUser.username} className="w-8 h-8 rounded-full" />
+                    <LazyImage
+                      src={currentUser.avatar}
+                      alt={currentUser.username}
+                      width={32}
+                      height={32}
+                      className="w-8 h-8 rounded-full"
+                    />
                   ) : (
                     <div className="w-8 h-8 bg-healing-accent rounded-full flex items-center justify-center">
                       <span className="text-white text-sm font-medium">

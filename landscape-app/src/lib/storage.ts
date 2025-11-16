@@ -12,7 +12,28 @@ export const storage = {
   getPhotos: (): Photo[] => {
     if (typeof window === 'undefined') return [];
     const data = localStorage.getItem(STORAGE_KEYS.PHOTOS);
-    return data ? JSON.parse(data) : [];
+    const photos = data ? JSON.parse(data) : [];
+    
+    // 清理可能包含blob URL的照片数据
+    const cleanedPhotos = photos.filter((photo: Photo) => {
+      if (photo.imageUrl && photo.imageUrl.includes('blob:')) {
+        console.warn('发现包含blob URL的照片，将被过滤:', photo.id, photo.imageUrl);
+        return false;
+      }
+      if (photo.userAvatar && photo.userAvatar.includes('blob:')) {
+        console.warn('发现包含blob URL的用户头像，将被清理:', photo.id);
+        photo.userAvatar = '';
+      }
+      return true;
+    });
+    
+    // 如果有照片被清理，更新存储
+    if (cleanedPhotos.length !== photos.length) {
+      console.log(`清理了 ${photos.length - cleanedPhotos.length} 个包含blob URL的照片`);
+      storage.savePhotos(cleanedPhotos);
+    }
+    
+    return cleanedPhotos;
   },
 
   savePhotos: (photos: Photo[]): void => {
@@ -44,7 +65,25 @@ export const storage = {
   getUsers: (): User[] => {
     if (typeof window === 'undefined') return [];
     const data = localStorage.getItem(STORAGE_KEYS.USERS);
-    return data ? JSON.parse(data) : [];
+    const users = data ? JSON.parse(data) : [];
+    
+    // 清理用户头像中的blob URL
+    const cleanedUsers = users.map((user: User) => {
+      if (user.avatar && user.avatar.includes('blob:')) {
+        console.warn('发现包含blob URL的用户头像，将被清理:', user.id);
+        return { ...user, avatar: '' };
+      }
+      return user;
+    });
+    
+    // 如果有用户被清理，更新存储
+    const hasChanges = cleanedUsers.some((user: User, index: number) => user.avatar !== users[index]?.avatar);
+    if (hasChanges) {
+      console.log('清理了用户头像中的blob URL');
+      storage.saveUsers(cleanedUsers);
+    }
+    
+    return cleanedUsers;
   },
 
   saveUsers: (users: User[]): void => {
@@ -55,7 +94,17 @@ export const storage = {
   getCurrentUser: (): User | null => {
     if (typeof window === 'undefined') return null;
     const data = localStorage.getItem(STORAGE_KEYS.CURRENT_USER);
-    return data ? JSON.parse(data) : null;
+    const user = data ? JSON.parse(data) : null;
+    
+    // 清理当前用户头像中的blob URL
+    if (user && user.avatar && user.avatar.includes('blob:')) {
+      console.warn('发现当前用户头像包含blob URL，将被清理:', user.id);
+      const cleanedUser = { ...user, avatar: '' };
+      storage.setCurrentUser(cleanedUser);
+      return cleanedUser;
+    }
+    
+    return user;
   },
 
   setCurrentUser: (user: User | null): void => {

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>添加测试数据</title>
+</head>
+<body>
+    <h1>添加测试照片数据</h1>
+    <button onclick="addTestData()">添加测试照片</button>
+    <button onclick="clearData()">清除所有数据</button>
+    <div id="result"></div>
+    
+    <script>
+        // 测试SVG图片（心形图标）
+        const testSvg = `<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="400" height="300" fill="#E8F5E8"/>
+<path d="M200 80C180 60 150 60 150 90C150 120 200 180 200 180C200 180 250 120 250 90C250 60 220 60 200 80Z" fill="#FF6B6B"/>
+<text x="200" y="220" text-anchor="middle" fill="#333" font-family="Arial" font-size="16">美丽风景</text>
+</svg>`;
+        
+        const base64Image = 'data:image/svg+xml;base64,' + btoa(testSvg);
+        
+        function addTestData() {
+            // 创建测试用户
+            const testUser = {
+                id: 'test-user-001',
+                username: '风景摄影师',
+                email: 'test@example.com',
+                avatar: '',
+                bio: '热爱拍摄自然风景',
+                uploadCount: 1,
+                favorites: [],
+                createdAt: new Date().toISOString()
+            };
+            
+            // 创建测试照片
+            const testPhoto = {
+                id: 'test-photo-' + Date.now(),
+                title: '美丽的日落风景',
+                description: '这是使用base64格式存储的美丽风景照片，展示了SVG心形图标在绿色背景上的效果。',
+                location: '山顶观景台',
+                imageUrl: base64Image,
+                userId: testUser.id,
+                userName: testUser.username,
+                userAvatar: testUser.avatar,
+                uploadTime: new Date().toISOString(),
+                likes: 8,
+                comments: [
+                    {
+                        id: 'comment-1',
+                        userId: 'user-2',
+                        userName: '旅行者',
+                        userAvatar: '',
+                        content: '太美了！是在哪里拍的？',
+                        timestamp: new Date(Date.now() - 3600000).toISOString()
+                    },
+                    {
+                        id: 'comment-2',
+                        userId: 'user-3',
+                        userName: '摄影爱好者',
+                        userAvatar: '',
+                        content: '色彩很棒，构图也很棒！',
+                        timestamp: new Date(Date.now() - 7200000).toISOString()
+                    }
+                ],
+                tags: ['日落', '风景', '自然', '摄影']
+            };
+            
+            // 保存到localStorage
+            localStorage.setItem('currentUser', JSON.stringify(testUser));
+            
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            users.push(testUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            const photos = JSON.parse(localStorage.getItem('photos') || '[]');
+            photos.unshift(testPhoto);
+            localStorage.setItem('photos', JSON.stringify(photos));
+            
+            document.getElementById('result').innerHTML = `
+                <h2>✅ 测试数据添加成功！</h2>
+                <p>用户: ${testUser.username}</p>
+                <p>照片: ${testPhoto.title}</p>
+                <p>照片数量: ${photos.length}</p>
+                <p>base64图片长度: ${base64Image.length}</p>
+                <p><a href="/" target="_blank">打开主页查看</a></p>
+            `;
+        }
+        
+        function clearData() {
+            localStorage.clear();
+            document.getElementById('result').innerHTML = '<p>数据已清除</p>';
+        }
+    </script>
+</body>
+</html>

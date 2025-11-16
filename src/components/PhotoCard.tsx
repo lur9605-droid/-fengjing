@@ -119,7 +119,13 @@ export default function PhotoCard({ photo, onClick }: PhotoCardProps) {
             onClick={handleUserClick}
           >
             {photo.userAvatar ? (
-              <img src={photo.userAvatar} alt={photo.userName} className="w-6 h-6 rounded-full" />
+              <LazyImage
+                src={photo.userAvatar}
+                alt={photo.userName}
+                width={24}
+                height={24}
+                className="w-6 h-6 rounded-full"
+              />
             ) : (
               <div className="w-6 h-6 bg-healing-accent rounded-full flex items-center justify-center">
                 <span className="text-white text-xs font-medium">

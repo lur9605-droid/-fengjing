@@ -24,8 +24,29 @@ export default function Home() {
   }, [photos, searchTerm, sortBy]);
 
   const loadPhotos = () => {
-    const allPhotos = storage.getPhotos();
-    setPhotos(allPhotos);
+    let allPhotos = storage.getPhotos();
+    
+    // 清理可能包含blob URL的照片数据
+    const cleanedPhotos = allPhotos.filter(photo => {
+      // 检查并清理可能包含blob URL的图片地址
+      if (photo.imageUrl && photo.imageUrl.includes('blob:')) {
+        console.warn('发现包含blob URL的照片，将被过滤:', photo.id, photo.imageUrl);
+        return false; // 过滤掉包含blob URL的照片
+      }
+      if (photo.userAvatar && photo.userAvatar.includes('blob:')) {
+        console.warn('发现包含blob URL的用户头像，将被清理:', photo.id);
+        photo.userAvatar = ''; // 清理用户头像中的blob URL
+      }
+      return true;
+    });
+    
+    // 如果有照片被清理，更新存储
+    if (cleanedPhotos.length !== allPhotos.length) {
+      console.log(`清理了 ${allPhotos.length - cleanedPhotos.length} 个包含blob URL的照片`);
+      storage.savePhotos(cleanedPhotos);
+    }
+    
+    setPhotos(cleanedPhotos);
     setLoading(false);
   };
 

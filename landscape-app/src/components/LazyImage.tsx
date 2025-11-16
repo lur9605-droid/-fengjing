@@ -9,6 +9,7 @@ interface LazyImageProps {
   width?: number;
   height?: number;
   className?: string;
+  style?: React.CSSProperties;
   priority?: boolean;
   placeholder?: 'blur' | 'empty';
   blurDataURL?: string;
@@ -20,6 +21,7 @@ export default function LazyImage({
   width,
   height,
   className = '',
+  style,
   priority = false,
   placeholder = 'blur',
   blurDataURL = 'data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAAcAAAAAQAAABAAQUxQSC0AAAABJ0Cg3l8AZrg3gD8A/n8A/39gAAAAAA==',
@@ -65,18 +67,19 @@ export default function LazyImage({
   };
 
   const handleImageError = () => {
-    setImageSrc('/placeholder-image.jpg');
+    setImageSrc('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0yMDAgMTUwTDE3NSAxMjVIMjI1TDIwMCAxNTBaIiBmaWxsPSIjOUI5QjlCIi8+CjxwYXRoIGQ9Ik0yMDAgMTUwTDE3NSAxNzVIMjI1TDIwMCAxNTBaIiBmaWxsPSIjOUI5QjlCIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOUI5QjlCIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiPuaJi+WKoOi9veWksei0pTwvdGV4dD4KPC9zdmc+');
   };
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div className={`relative ${className}`}>
       <Image
         ref={imgRef}
         src={imageSrc}
         alt={alt}
         width={width}
         height={height}
-        className={`lazy-image ${isLoaded ? 'loaded' : ''} w-full h-full object-cover`}
+        className={`lazy-image ${isLoaded ? 'loaded' : ''} w-full h-full object-contain`}
+        style={style}
         onLoad={handleImageLoad}
         onError={handleImageError}
         priority={priority}

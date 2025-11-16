@@ -28,7 +28,16 @@ export default function UploadPage() {
     setCurrentUser(user);
   });
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = error => reject(error);
+    });
+  };
+
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
     const validFiles = acceptedFiles.filter(file => 
       file.type === 'image/jpeg' || 
       file.type === 'image/png' || 
@@ -42,7 +51,7 @@ export default function UploadPage() {
     setFiles(validFiles);
     
     // Create preview URLs
-    const urls = validFiles.map(file => URL.createObjectURL(file));
+    const urls = await Promise.all(validFiles.map(file => fileToBase64(file)));
     setPreviewUrls(urls);
   }, []);
 
@@ -81,16 +90,16 @@ export default function UploadPage() {
     setUploading(true);
 
     try {
-      // In a real app, you would upload to Supabase Storage here
-      // For demo purposes, we'll use the preview URL as the image URL
-      const imageUrl = previewUrls[0];
+      // 将图片文件转换为base64格式进行持久化存储
+      const file = files[0];
+      const base64Image = await fileToBase64(file);
       
       const newPhoto = {
         id: uuidv4(),
         title: title.trim(),
         description: description.trim() || undefined,
         location: location.trim(),
-        imageUrl,
+        imageUrl: base64Image,
         userId: currentUser.id,
         userName: currentUser.username,
         userAvatar: currentUser.avatar,
@@ -110,8 +119,7 @@ export default function UploadPage() {
       };
       storage.updateUser(currentUser.id, updatedUser);
 
-      // Clean up preview URLs
-      previewUrls.forEach(url => URL.revokeObjectURL(url));
+
 
       // Redirect to photo detail page
       router.push(`/photo/${newPhoto.id}`);
@@ -125,7 +133,6 @@ export default function UploadPage() {
 
   const removeFile = (index: number) => {
     setFiles(files.filter((_, i) => i !== index));
-    URL.revokeObjectURL(previewUrls[index]);
     setPreviewUrls(previewUrls.filter((_, i) => i !== index));
   };
 
@@ -187,7 +194,6 @@ export default function UploadPage() {
                 <button
                   onClick={() => {
                     setFiles([]);
-                    previewUrls.forEach(url => URL.revokeObjectURL(url));
                     setPreviewUrls([]);
                   }}
                   className="text-healing-accent hover:text-[var(--color-primary-600)] text-sm"

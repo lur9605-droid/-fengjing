@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Navigation from '@/components/Navigation';
+import LazyImage from '@/components/LazyImage';
 import { storage } from '@/lib/storage';
 import { Photo, Comment } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
@@ -149,11 +150,13 @@ export default function PhotoDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Photo Section */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-              <img 
+            <div className="bg-white rounded-xl shadow-sm">
+              <LazyImage 
                 src={photo.imageUrl} 
                 alt={photo.title}
-                className="w-full h-auto max-h-screen object-contain"
+                width={1200}
+                height={800}
+                className="w-full h-auto max-h-[90vh] object-contain"
               />
             </div>
             
@@ -232,7 +235,13 @@ export default function PhotoDetailPage() {
               <h3 className="font-semibold text-gray-800 mb-4">上传者</h3>
               <div className="flex items-center space-x-3 mb-3">
                 {photo.userAvatar ? (
-                  <img src={photo.userAvatar} alt={photo.userName} className="w-12 h-12 rounded-full" />
+                  <LazyImage
+                    src={photo.userAvatar}
+                    alt={photo.userName}
+                    width={48}
+                    height={48}
+                    className="w-12 h-12 rounded-full"
+                  />
                 ) : (
                   <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
                     <span className="text-white font-medium">
@@ -285,7 +294,13 @@ export default function PhotoDetailPage() {
                     <div key={comment.id} className="border-b border-gray-100 pb-4 last:border-b-0">
                       <div className="flex items-center space-x-3 mb-2">
                         {comment.userAvatar ? (
-                          <img src={comment.userAvatar} alt={comment.userName} className="w-8 h-8 rounded-full" />
+                          <LazyImage
+                            src={comment.userAvatar}
+                            alt={comment.userName}
+                            width={32}
+                            height={32}
+                            className="w-8 h-8 rounded-full"
+                          />
                         ) : (
                           <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
                             <span className="text-white text-sm font-medium">

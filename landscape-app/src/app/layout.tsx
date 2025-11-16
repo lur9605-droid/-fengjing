@@ -1,9 +1,6 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 import MobileNavigation from '@/components/MobileNavigation'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: '风景探索墙 - 分享美丽的自然风光',
@@ -30,7 +27,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className={`${inter.className} main-content`}>
+      <body className="main-content">
         {children}
         <MobileNavigation />
       </body>

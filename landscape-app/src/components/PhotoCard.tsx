@@ -73,8 +73,7 @@ export default function PhotoCard({ photo, onClick }: PhotoCardProps) {
           alt={photo.title}
           width={400}
           height={300}
-          className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
-          style={{ maxHeight: '400px' }}
+          className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
@@ -119,7 +118,13 @@ export default function PhotoCard({ photo, onClick }: PhotoCardProps) {
             onClick={handleUserClick}
           >
             {photo.userAvatar ? (
-              <img src={photo.userAvatar} alt={photo.userName} className="w-6 h-6 rounded-full" />
+              <LazyImage
+                src={photo.userAvatar}
+                alt={photo.userName}
+                width={24}
+                height={24}
+                className="w-6 h-6 rounded-full"
+              />
             ) : (
               <div className="w-6 h-6 bg-healing-accent rounded-full flex items-center justify-center">
                 <span className="text-white text-xs font-medium">

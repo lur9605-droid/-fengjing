@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Navigation from '@/components/Navigation';
 import MasonryGrid from '@/components/MasonryGrid';
+import LazyImage from '@/components/LazyImage';
 import { storage } from '@/lib/storage';
 import { Photo, User } from '@/types';
 
@@ -101,7 +102,13 @@ export default function UserProfilePage() {
             {/* Avatar */}
             <div className="flex-shrink-0">
               {user.avatar ? (
-                <img src={user.avatar} alt={user.username} className="w-24 h-24 rounded-full" />
+                <LazyImage
+                  src={user.avatar}
+                  alt={user.username}
+                  width={96}
+                  height={96}
+                  className="w-24 h-24 rounded-full"
+                />
               ) : (
                 <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center">
                   <span className="text-white text-3xl font-bold">
