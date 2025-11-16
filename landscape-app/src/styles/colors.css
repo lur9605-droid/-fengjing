@@ -1,0 +1,283 @@
+/* 高级治愈感色彩方案 */
+
+:root {
+  /* 主色调 - 温暖治愈色系 */
+  --color-primary-50: #fef7f0;
+  --color-primary-100: #feedd9;
+  --color-primary-200: #fcd9b0;
+  --color-primary-300: #f9bd7e;
+  --color-primary-400: #f59e54;
+  --color-primary-500: #f2852a; /* 主色 - 温暖琥珀 */
+  --color-primary-600: #e36f1f;
+  --color-primary-700: #bd5a1b;
+  --color-primary-800: #96491a;
+  --color-primary-900: #783d18;
+
+  /* 辅助色 - 自然治愈色系 */
+  --color-secondary-50: #f6f9f4;
+  --color-secondary-100: #e8f2e2;
+  --color-secondary-200: #d2e5c6;
+  --color-secondary-300: #b0d2a1;
+  --color-secondary-400: #8bb878;
+  --color-secondary-500: #6ba052; /* 辅助色 - 自然绿 */
+  --color-secondary-600: #54813f;
+  --color-secondary-700: #436534;
+  --color-secondary-800: #37512c;
+  --color-secondary-900: #2f4327;
+
+  /* 中性色 - 温暖灰色调 */
+  --color-warm-gray-50: #fafaf9;
+  --color-warm-gray-100: #f5f5f4;
+  --color-warm-gray-200: #e7e5e4;
+  --color-warm-gray-300: #d6d3d1;
+  --color-warm-gray-400: #a8a29e;
+  --color-warm-gray-500: #78716c; /* 主要中性色 */
+  --color-warm-gray-600: #57534e;
+  --color-warm-gray-700: #44403c;
+  --color-warm-gray-800: #292524;
+  --color-warm-gray-900: #1c1917;
+
+  /* 背景色 - 治愈渐变 */
+  --bg-gradient-warm: linear-gradient(135deg, #fef7f0 0%, #f6f9f4 100%);
+  --bg-gradient-soft: linear-gradient(135deg, #fafaf9 0%, #f5f5f4 100%);
+  --bg-gradient-amber: linear-gradient(135deg, #fef7f0 0%, #feedd9 100%);
+  --bg-gradient-green: linear-gradient(135deg, #f6f9f4 0%, #e8f2e2 100%);
+  --border-healing-light: #e7e5e4;
+  --border-focus: #f59e54;
+
+  /* 按钮样式 */
+  --btn-primary-bg: var(--color-primary-500);
+  --btn-primary-text: #ffffff;
+  --btn-primary-hover: var(--color-primary-600);
+  --btn-secondary-bg: var(--color-warm-gray-100);
+  --btn-secondary-text: var(--color-warm-gray-700);
+  --btn-secondary-hover: var(--color-warm-gray-200);
+
+  /* 输入框样式 */
+  --input-bg: var(--color-warm-50);
+  --input-border: var(--color-warm-200);
+  --input-text: var(--color-warm-800);
+
+  /* 卡片阴影 - 柔和温暖 */
+  --shadow-soft: 0 4px 20px rgba(120, 61, 24, 0.08);
+  --shadow-card: 0 8px 32px rgba(120, 61, 24, 0.12);
+  --shadow-hover: 0 12px 40px rgba(120, 61, 24, 0.16);
+  --shadow-inner: inset 0 2px 4px rgba(120, 61, 24, 0.06);
+
+  /* 边框色 - 温暖柔和 */
+  --border-soft: #e7e5e4;
+  --border-light: #d6d3d1;
+  --border-focus: #f59e54;
+  --border-healing-light: var(--color-warm-200);
+  --border-healing-medium: var(--color-warm-300);
+  --border-healing-focus: var(--color-primary-400);
+  --border-card: var(--color-warm-100);
+
+  /* 卡片背景 */
+  --bg-healing-card: #ffffff;
+  --shadow-healing: 0 4px 20px rgba(120, 61, 24, 0.08);
+  --shadow-healing-hover: 0 12px 40px rgba(120, 61, 24, 0.16);
+
+  /* 强调色 */
+  --color-healing-accent: var(--color-primary-500);
+
+  /* 文字色 - 温暖层次 */
+  --text-primary: #1c1917;      /* 主要文字 */
+  --text-secondary: #44403c;     /* 次要文字 */
+  --text-muted: #78716c;       /* 辅助文字 */
+  --text-light: #a8a29e;        /* 浅色文字 */
+  --text-white: #ffffff;        /* 白色文字 */
+
+  /* 状态色 - 治愈系 */
+  --state-success: #6ba052;
+  --state-warning: #f59e54;
+  --state-error: #dc2626;
+  --state-info: #3b82f6;
+
+  /* 成功状态背景色 */
+  --color-success-50: #f6f9f4;
+  --color-success-100: #e8f2e2;
+  --color-success-200: #d2e5c6;
+  --color-success-600: #436534;
+
+  /* 特殊色 - 治愈点缀 */
+  --accent-rose: #f87171;       /* 温柔的玫瑰色 */
+  --accent-sky: #7dd3fc;        /* 天空蓝 */
+  --accent-amber: #fbbf24;      /* 琥珀黄 */
+  --accent-emerald: #34d399;    /* 翡翠绿 */
+}
+
+/* 深色模式色彩方案 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary-50: #783d18;
+    --color-primary-100: #96491a;
+    --color-primary-200: #bd5a1b;
+    --color-primary-300: #e36f1f;
+    --color-primary-400: #f2852a;
+    --color-primary-500: #f59e54; /* 主色 - 温暖琥珀 */
+    --color-primary-600: #f9bd7e;
+    --color-primary-700: #fcd9b0;
+    --color-primary-800: #feedd9;
+    --color-primary-900: #fef7f0;
+
+    --color-secondary-50: #2f4327;
+    --color-secondary-100: #37512c;
+    --color-secondary-200: #436534;
+    --color-secondary-300: #54813f;
+    --color-secondary-400: #6ba052; /* 辅助色 - 自然绿 */
+    --color-secondary-500: #8bb878;
+    --color-secondary-600: #b0d2a1;
+    --color-secondary-700: #d2e5c6;
+    --color-secondary-800: #e8f2e2;
+    --color-secondary-900: #f6f9f4;
+
+    --color-warm-gray-50: #1c1917;
+    --color-warm-gray-100: #292524;
+    --color-warm-gray-200: #44403c;
+    --color-warm-gray-300: #57534e;
+    --color-warm-gray-400: #78716c;
+    --color-warm-gray-500: #a8a29e; /* 主要中性色 */
+    --color-warm-gray-600: #d6d3d1;
+    --color-warm-gray-700: #e7e5e4;
+    --color-warm-gray-800: #f5f5f4;
+    --color-warm-gray-900: #fafaf9;
+
+    --text-primary: #fafaf9;      /* 主要文字 */
+    --text-secondary: #f5f5f4;   /* 次要文字 */
+    --text-muted: #d6d3d1;        /* 辅助文字 */
+    --text-light: #a8a29e;        /* 浅色文字 */
+  }
+}
+
+/* 治愈感背景样式 */
+.bg-healing-warm {
+  background: var(--bg-gradient-warm);
+}
+
+.bg-healing-soft {
+  background: var(--bg-gradient-soft);
+}
+
+.bg-healing-amber {
+  background: var(--bg-gradient-amber);
+}
+
+.bg-healing-green {
+  background: var(--bg-gradient-green);
+}
+
+/* 治愈感卡片样式 */
+.card-healing {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(231, 229, 228, 0.3);
+  box-shadow: var(--shadow-soft);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.card-healing:hover {
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+}
+
+/* 治愈感按钮样式 */
+.btn-healing-primary {
+  background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-600) 100%);
+  color: var(--text-white);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(242, 133, 42, 0.3);
+}
+
+.btn-healing-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(242, 133, 42, 0.4);
+}
+
+.btn-healing-secondary {
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-soft);
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-healing-secondary:hover {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: var(--color-primary-300);
+  color: var(--color-primary-600);
+}
+
+/* 治愈感文字样式 */
+.text-healing-primary {
+  color: var(--text-primary);
+}
+
+.text-healing-secondary {
+  color: var(--text-secondary);
+}
+
+.text-healing-muted {
+  color: var(--text-muted);
+}
+
+/* 治愈感输入框样式 */
+.input-healing {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
+  color: var(--text-primary);
+}
+
+.input-healing:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(245, 158, 84, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 治愈感渐变文字 */
+.text-gradient-warm {
+  background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-secondary-500) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 动画效果 - 治愈感 */
+@keyframes healing-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.animate-healing-pulse {
+  animation: healing-pulse 2s ease-in-out infinite;
+}
+
+@keyframes healing-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-healing-float {
+  animation: healing-float 3s ease-in-out infinite;
+}
