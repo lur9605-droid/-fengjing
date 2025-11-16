@@ -1,0 +1,275 @@
+/* 移动端自适应样式 */
+
+/* 基础响应式设置 */
+* {
+  box-sizing: border-box;
+}
+
+/* 移动端导航优化 */
+@media (max-width: 768px) {
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-healing-card);
+    border-top: 1px solid var(--border-healing-light);
+    z-index: 1000;
+    padding: 8px 0;
+    box-shadow: var(--shadow-inner);
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 8px;
+    font-size: 12px;
+    color: var(--color-healing-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .mobile-nav-item.active {
+    color: var(--color-healing-accent);
+  }
+
+  .mobile-nav-icon {
+    font-size: 20px;
+    margin-bottom: 2px;
+  }
+
+  /* 为底部导航留出空间 */
+  .main-content {
+    padding-bottom: 80px;
+  }
+}
+
+/* 移动端卡片优化 */
+@media (max-width: 640px) {
+  .photo-card {
+    margin-bottom: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .photo-card img {
+    border-radius: 8px 8px 0 0;
+  }
+
+  .photo-card-info {
+    padding: 12px;
+  }
+
+  .photo-card-title {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .photo-card-location {
+    font-size: 12px;
+  }
+
+  .photo-card-stats {
+    font-size: 12px;
+  }
+}
+
+/* 移动端上传页面优化 */
+@media (max-width: 640px) {
+  .upload-area {
+    min-height: 200px;
+    padding: 24px;
+    border-radius: 12px;
+  }
+
+  .upload-icon {
+    font-size: 48px;
+  }
+
+  .upload-text {
+    font-size: 16px;
+  }
+
+  .upload-subtext {
+    font-size: 14px;
+  }
+
+  .form-input {
+    font-size: 16px; /* 防止iOS缩放 */
+  }
+}
+
+/* 移动端详情页优化 */
+@media (max-width: 768px) {
+  .photo-detail-container {
+    padding: 0;
+  }
+
+  .photo-detail-image {
+    border-radius: 0;
+    max-height: 60vh;
+  }
+
+  .photo-detail-info {
+    padding: 20px;
+  }
+
+  .photo-detail-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .action-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .comment-section {
+    padding: 20px;
+  }
+
+  .comment-form {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .comment-input {
+    font-size: 16px;
+  }
+
+  .comment-submit {
+    width: 100%;
+  }
+}
+
+/* 移动端用户资料页优化 */
+@media (max-width: 640px) {
+  .profile-header {
+    padding: 24px;
+    text-align: center;
+  }
+
+  .profile-avatar {
+    margin: 0 auto 16px;
+  }
+
+  .profile-stats {
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .profile-stat {
+    padding: 0 12px;
+  }
+
+  .profile-stat-value {
+    font-size: 20px;
+  }
+
+  .profile-stat-label {
+    font-size: 12px;
+  }
+}
+
+/* 移动端搜索页优化 */
+@media (max-width: 640px) {
+  .search-form {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .search-input {
+    font-size: 16px;
+  }
+
+  .search-select {
+    font-size: 16px;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+}
+
+/* 触摸优化 */
+@media (hover: none) and (pointer: coarse) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .touch-button {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}
+
+/* 暗色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .dark-mode {
+    background-color: #1f2937;
+    color: #f9fafb;
+  }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 图片懒加载优化 */
+.lazy-image {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lazy-image.loaded {
+  opacity: 1;
+}
+
+/* 加载状态优化 */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* 滚动优化 */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* 自定义滚动条 */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
